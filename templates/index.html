@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestão de Tarefas</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; }
+        .task { padding: 10px; border-bottom: 1px solid #ccc; }
+        .done { text-decoration: line-through; color: gray; }
+        input { padding: 8px; width: 70%; }
+        button { padding: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Minhas Tarefas</h1>
+    
+    <form action="/add" method="POST">
+        <input type="text" name="title" placeholder="Nova tarefa..." required>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <div>
+        {% for task in tasks %}
+        <div class="task">
+            <span class="{{ 'done' if task[2] else '' }}">{{ task[1] }}</span>
+            <a href="/complete/{{ task[0] }}">[Concluir]</a>
+            <a href="/delete/{{ task[0] }}">[Eliminar]</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
